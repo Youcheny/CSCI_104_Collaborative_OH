@@ -1,52 +1,28 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 
-struct Node {
-	int val;
-	Node* next;
-	Node(int _val): val(_val), next(NULL) {}
-	~Node() {
-		if (next != NULL)
-			delete next;
-	}
-};
+vector<vector<string> > readAndParse(string filename);
+void coutWords(vector<vector<string> >& words);
 
-Node* reverseLinkedList(Node* head);
-
-Node* reverseLinkedList(Node* head) {
+vector<vector<string> > readAndParse(string filename) {
 	// TODO
 }
 
-void printLinkedList(Node* head) {
-	for (Node* it=head; it!=NULL; it=it->next)
-		cout << it->val << ' ';
-	cout << endl;
+void coutWords(vector<vector<string> >& words) {
+	for (vector<string>& line : words) {
+		for (string& word : line) {
+			cout << word << ' ';
+		}
+		cout << endl;
+	} 
 }
 
-void testReverseLinkedList(Node* toTest) {
-	cout << "original: ";
-	printLinkedList(toTest);
-	toTest = reverseLinkedList(toTest);
-	cout << "reversed: ";
-	printLinkedList(toTest);
-}
-
-int main() {
-	// testing list of 0 to 9
-	Node* linkedList_1 = new Node(0);
-	Node* writePt = linkedList_1;
-	for (int i=1; i<10; ++i) {
-		writePt->next = new Node(i);
-		writePt = writePt->next;
-	}
-	testReverseLinkedList(linkedList_1);
-	delete linkedList_1;
-	// testing list of one element
-	Node* linkedList_2 = new Node(42);
-	testReverseLinkedList(linkedList_2);
-	delete linkedList_2;
-	// testing list of nothing
-	Node* linkedList_3 = NULL;
-	testReverseLinkedList(linkedList_3);
+int main(int argc, char *argv[]) {
+	vector<vector<string> > words1 = readAndParse("exercise1_file.txt");
+	coutWords(words1);
 }
